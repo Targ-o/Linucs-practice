@@ -21,7 +21,14 @@ def find_student_by_id(student_id):
 
 def add_new_student(name, grades_str):
     # Добавляет нового студента. Оценки передаются строкой через запятую (например: '4,5,3')
-    grades = [int(g.strip()) for g in grades_str.split(",")]
+    try:
+        if not grades_str.strip():
+            raise ValueError ("Пустая строка")
+        grades = [int(g.strip()) for g in grades_str.split(",")]
+    except ValueError:
+        print("Ошибка: оценки должны быть числами через запятую, например: 4,5,3")
+        return
+    
     new_id = len(students_db) + 1
     new_student = {"id": new_id, "name": name, "grades": grades}
     students_db.append(new_student)
