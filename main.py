@@ -8,8 +8,12 @@ students_db = [
 
 def get_average_grade(student):
     # Считает средний балл студента
-    return sum(student["grades"]) / len(student["grades"])
-
+    try:
+        return sum(student["grades"]) / len(student["grades"])
+    except ZeroDivisionError:
+        return 0
+    except TypeError:
+        return 0
 
 def find_student_by_id(student_id):
     # Ищет студента по ID
